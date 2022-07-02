@@ -1,12 +1,13 @@
-package ru.springinaction.first.tacocloud.tacos;
+package ru.springinaction.first.tacocloud.tacos.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+import ru.springinaction.first.tacocloud.tacos.Ingredient;
+import ru.springinaction.first.tacocloud.tacos.Taco;
+import ru.springinaction.first.tacocloud.tacos.TacoOrder;
+import ru.springinaction.first.tacocloud.tacos.Type;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +21,7 @@ public class DesignTacoController {
     @ModelAttribute
     public void addIngredientsToModel(Model model){
         List<Ingredient> ingredients = Arrays.asList(
-          new Ingredient("FLTO","Flour Tortilla",Type.WRAP),
+          new Ingredient("FLTO","Flour Tortilla", Type.WRAP),
                 new Ingredient("COTO","Corn Tortilla",Type.WRAP),
                 new Ingredient("GRBF","Ground Beef",Type.PROTEIN),
                 new Ingredient("CARN","Carnitas",Type.PROTEIN),
@@ -41,6 +42,12 @@ public class DesignTacoController {
     public String showDesignForm(){
         return "design";
     }
+    @PostMapping
+    public String processTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder){
+        tacoOrder.addTaco(taco);
+        log.info("Processing taco: {} ", taco);
+        return "redirect:/orders/current";
+    }
 
     private Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Type type) {
         return ingredients
@@ -52,5 +59,9 @@ public class DesignTacoController {
     @ModelAttribute(name="taco")
     public Taco taco(){
         return new Taco();
+    }
+    @ModelAttribute(name="tacoOrder")
+    public TacoOrder order(){
+        return new TacoOrder();
     }
 }
