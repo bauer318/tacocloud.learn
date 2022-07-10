@@ -4,9 +4,9 @@ create table if not exists Taco_Order (
     delivery_Street varchar(50) not null ,
     delivery_City varchar(50) not null ,
     delivery_State varchar(2) not null ,
-    delvery_zip varchar(10) not null,
+    delivery_zip varchar(10) not null,
     cc_number varchar(16) not null,
-    cc_expirationn varchar(5) not null,
+    cc_expiration varchar(5) not null,
     cc_cvv varchar(3) not null,
     placed_at timestamp not null
 );
@@ -15,7 +15,7 @@ create table if not exists Taco(
     name varchar(50) not null,
     taco_order bigint not null,
     taco_order_key bigint not null,
-    crated_at timestamp not null
+    created_at timestamp not null
 );
 create table if not exists Ingredient_Ref(
     ingredient varchar(4) not null,

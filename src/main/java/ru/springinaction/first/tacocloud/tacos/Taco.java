@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,5 +17,8 @@ public class Taco {
     private String name;
     @NotNull
     @Size(min=1, message="You want to choose at least 1 ingredient")
-    private List<Ingredient> ingredients;
+    private List<IngredientRef> ingredients = new ArrayList<>();
+    public void addIngredient(Ingredient taco){
+        this.ingredients.add(new IngredientRef(taco.getId()));
+    }
 }

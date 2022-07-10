@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class TacoOrder implements Serializable {
     @NotBlank(message="Delivery city is required")
     private String deliveryCity;
     @NotBlank(message="Delivery state is required")
+    @Size(max=2,message="must two character for state")
     private String deliveryState;
     @NotBlank(message="Delivery Zip is required")
     private String deliveryZip;
