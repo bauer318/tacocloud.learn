@@ -2,6 +2,8 @@ package ru.springinaction.first.tacocloud.tacos;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
@@ -13,8 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Table
 public class TacoOrder implements Serializable {
     private static  final   long    SerialVersionUID    =   1L;
+    @Id
     private Long id;
     private Date placedAt;
 
